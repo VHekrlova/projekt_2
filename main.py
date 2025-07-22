@@ -62,58 +62,51 @@ def evaluate_guess(secret, guess):
 
     return bulls, cows 
 
-# Funkce pro vytvoření srozumitelného výstupu (např. 1 bull, 2 cows)
+# Výstup
 def format_feedback(bulls, cows):
-    # Formátování slova bull podle množného čísla
     if bulls == 1:
         bull_str = "1 bull"
     else:
         bull_str = f"{bulls} bulls"
 
-    # Formátování slova cow podle množného čísla
     if cows == 1:
         cow_str = "1 cow"
     else:
         cow_str = f"{cows} cows"
-
-    # Vracíme výsledek jako text
     return f"{bull_str}, {cow_str}"
 
-# Hlavní herní smyčka – řídí celý průběh hry
+# Hra
 def play_game():
-    print_intro()  # Zobrazíme úvodní zprávy
+    print_intro()  
 
-    secret = generate_secret_number()  # Vygenerujeme tajné číslo
-    attempts = 0  # Počet pokusů nastavíme na nulu
+    secret = generate_secret_number()  
+    attempts = 0  # Počet pokusů
 
-    while True:  # Nekonečný cyklus, opakuje se dokud hráč neuhodne
-        print("-----------------------------------------------")
+    while True: 
+        print("-" * 47)
         guess = input("Enter a number:\n>>> ")  # Požádáme uživatele o tip
 
-        guess = guess.strip()  # Odstraníme mezery na začátku a konci
+        guess = guess.strip()  
 
-        # Zkontrolujeme, jestli je vstup platný
         if not is_valid_guess(guess):
-            continue  # Pokud ne, požádáme o nový vstup
+            continue  
 
-        attempts += 1  # Zvýšíme počet pokusů
+        attempts += 1  
 
-        # Vyhodnotíme vstup (kolik bulls a cows)
         bulls, cows = evaluate_guess(secret, guess)
 
-        # Pokud hráč uhodl všechna čísla správně
         if bulls == 4:
             print(f"Correct, you've guessed the right number")
             if attempts == 1:
-                print("in 1 guess!")  # Výpis pro 1 pokus
+                print("in 1 guess!")  
             else:
-                print(f"in {attempts} guesses!")  # Výpis pro více pokusů
+                print(f"in {attempts} guesses!")  
             print("-" * 47)  
             print("That's amazing!") 
             break  
 
         else:
-            # Pokud číslo nebylo správné, zobrazíme výsledek
+            
             feedback = format_feedback(bulls, cows)
             print(feedback)
 
