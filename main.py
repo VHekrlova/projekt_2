@@ -1,3 +1,10 @@
+"""
+main.py: druhý projekt do Engeto Online Python Akademie
+
+author: Veronika Hekrlová
+email: VHekrlova@seznam.cz
+"""
+
 import random  
 import time
 
