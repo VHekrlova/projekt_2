@@ -1,15 +1,16 @@
 import random  
 
-# Funkce pro vypsání úvodní zprávy
 def print_intro():
+    """"Vypise uvodni zpravu"""
     print("Hi there!")  
     print("-" * 47)  
     print("I've generated a random 4 digit number for you.")  
     print("Let's play a bulls and cows game.")  
     print("-" * 47) 
 
-# Číslice musí být unikátní a nesmí začínat nulou
+
 def generate_secret_number():
+    """Vygeneruje 4mistny tajny kod"""
     first_digits = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
     first_digit = random.choice(first_digits)
     remaining_digits = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
@@ -19,8 +20,9 @@ def generate_secret_number():
 
     return secret_number 
 
-# Ověření vstupu
+
 def is_valid_guess(guess):
+    """Overi platny vstup"""
     if not guess.isdigit():
         print("Invalid input: Not a number.") 
         return False
@@ -40,30 +42,22 @@ def is_valid_guess(guess):
 
     return True 
 
-# Vyhodnocení počtu bulls and cows
 def evaluate_guess(secret, guess):
+    """Vyhodnoti pocer bulls a cows"""
     bulls = 0  
     cows = 0   
 
-    # Bulls
-    for i in range(4):
+    for i in range(4):  
         if guess[i] == secret[i]:
-            bulls += 1
+            bulls += 1  
+        elif guess[i] in secret:
+            cows += 1  
 
-    # Cows
-    for digit in guess:
-        if digit in secret:
-            # Počet výskytů číslice v obou řetězcích
-            count_in_secret = secret.count(digit)
-            count_in_guess = guess.count(digit)
-            cows += min(count_in_secret, count_in_guess)
+    return bulls, cows  
 
-    cows -= bulls  # Odečteme bulls, protože už byly započítány
 
-    return bulls, cows 
-
-# Výstup
 def format_feedback(bulls, cows):
+    """Vystup"""
     if bulls == 1:
         bull_str = "1 bull"
     else:
@@ -75,16 +69,16 @@ def format_feedback(bulls, cows):
         cow_str = f"{cows} cows"
     return f"{bull_str}, {cow_str}"
 
-# Hra
 def play_game():
+    """Spusti hru"""
     print_intro()  
 
     secret = generate_secret_number()  
-    attempts = 0  # Počet pokusů
+    attempts = 0  
 
     while True: 
         print("-" * 47)
-        guess = input("Enter a number:\n>>> ")  # Požádáme uživatele o tip
+        guess = input("Enter a number:\n>>> ")  
 
         guess = guess.strip()  
 
@@ -105,8 +99,7 @@ def play_game():
             print("That's amazing!") 
             break  
 
-        else:
-            
+        else:        
             feedback = format_feedback(bulls, cows)
             print(feedback)
 
