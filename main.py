@@ -1,4 +1,5 @@
 import random  
+import time
 
 def print_intro():
     """"Vypise uvodni zpravu"""
@@ -74,7 +75,8 @@ def play_game():
     print_intro()  
 
     secret = generate_secret_number()  
-    attempts = 0  
+    attempts = 0
+    start_time = time.time()  
 
     while True: 
         print("-" * 47)
@@ -96,7 +98,13 @@ def play_game():
             else:
                 print(f"in {attempts} guesses!")  
             print("-" * 47)  
-            print("That's amazing!") 
+            print("That's amazing!")
+
+            end_time = time.time()
+            duration = end_time - start_time
+            minutes = int(duration // 60)
+            seconds = int(duration % 60)
+            print(f"You solved it in {minutes} minute(s) and {seconds} second(s)!") 
             break  
 
         else:        
@@ -105,3 +113,4 @@ def play_game():
 
 if __name__ == "__main__":
     play_game()
+    
